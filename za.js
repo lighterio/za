@@ -6,7 +6,6 @@ var Server = require('./lib/Server');
 
 var api = module.exports = function () {
     return new Server();
-
 };
 
 /**
