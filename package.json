@@ -41,10 +41,11 @@
     "qs": "0.6.6"
   },
   "devDependencies": {
-    "zeriousify": "0.1.5",
     "assert-plus": "0.1.5",
-    "mocha": "1.20.0",
+    "coveralls": "2.10.0",
     "istanbul": "0.2.10",
-    "coveralls": "2.10.0"
+    "mocha": "1.20.0",
+    "supertest": "^0.13.0",
+    "zeriousify": "0.1.5"
   }
 }
