@@ -4,6 +4,7 @@ var request     = require('supertest');
 var http        = require('http');
 var za          = require('../za');
 
+// TODO: organize test fixtures and test suites
 describe('http', function () {
     // Fixtures
     var server;
@@ -62,6 +63,23 @@ describe('http', function () {
                 res.send(parseInt(code));
             });
         });
+
+        server.get('/send/json', function (req, res) {
+            res.send(jsonBody);
+        });
+
+        server.get('/header', function (req, res) {
+            res.send(req.header('content-type'));
+        });
+
+        server.get('/cookie', function (req, res) {
+            res.cookie('coo', 'kie');
+            res.send(200);
+        });
+
+        server.get('/redirect', function (req, res) {
+            res.redirect('http://google.com');
+        });
     });
 
     describe('zip', function () {
@@ -109,9 +127,10 @@ describe('http', function () {
                     .expect('content-encoding', /gzip/, done);
         });
     });
+    describe('send', function () {
 
-    codes.forEach(function (code) {
-        describe('send', function () {
+        // Testing send with a number
+        codes.forEach(function (code) {
             it('should return status code ' + code, function (done) {
                 request(server.requestListener()).get('/send/' + code)
                         .expect('content-type', /json/)
@@ -121,7 +140,37 @@ describe('http', function () {
 
             });
         });
-    });
 
+        // Testing send with object
+        it('should return a parsed json object as a string', function (done) {
+            request(server.requestListener()).get('/send/json')
+                    .expect(200)
+                    .expect(JSON.stringify(jsonBody))
+                    .end(done);
+        });
+
+        it('should have header sent from a request', function (done) {
+            request(server.requestListener()).get('/header')
+                    .set('content-type', 'application/custom')
+                    .expect('application/custom')
+                    .expect(200)
+                    .end(done);
+        });
+
+        it('should have cookie set from the rquest', function (done) {
+            request(server.requestListener()).get('/cookie')
+                    .expect(200)
+                    .expect('set-cookie', 'coo=kie')
+                    .end(done);
+        });
+
+        it('should redirect the request', function (done) {
+            request(server.requestListener()).get('/redirect')
+                    .expect(302)
+                    .expect('location', 'http://google.com')
+                    .end(done);
+        });
+
+    });
 
 });

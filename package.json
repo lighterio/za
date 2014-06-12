@@ -38,6 +38,7 @@
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "dependencies": {
+    "busboy": "^0.2.6",
     "qs": "0.6.6"
   },
   "devDependencies": {
