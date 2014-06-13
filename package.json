@@ -38,13 +38,15 @@
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "dependencies": {
+    "busboy": "^0.2.6",
     "qs": "0.6.6"
   },
   "devDependencies": {
-    "zeriousify": "0.1.5",
     "assert-plus": "0.1.5",
-    "mocha": "1.20.1",
-    "istanbul": "0.2.11",
-    "coveralls": "2.10.0"
+    "coveralls": "2.10.0",
+    "istanbul": "0.2.10",
+    "mocha": "1.20.0",
+    "supertest": "^0.13.0",
+    "zeriousify": "0.1.5"
   }
 }
