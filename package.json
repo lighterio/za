@@ -4,7 +4,7 @@
   "keywords": [
     "za"
   ],
-  "version": "0.0.16",
+  "version": "0.0.17",
   "main": "za.js",
   "homepage": "http://github.com/zerious/za",
   "repository": "http://github.com/zerious/za.git",
@@ -37,16 +37,13 @@
     "report": "open coverage/lcov-report/index.html",
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
-  "dependencies": {
-    "busboy": "0.2.7",
-    "qs": "0.6.6"
-  },
+  "dependencies": {},
   "devDependencies": {
     "assert-plus": "0.1.5",
     "coveralls": "2.10.0",
     "istanbul": "0.2.11",
     "mocha": "1.20.1",
-    "supertest": "^0.13.0",
+    "supertest": "0.13.0",
     "zeriousify": "0.1.5"
   }
 }
