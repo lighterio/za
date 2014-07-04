@@ -63,14 +63,5 @@ describe('Server', function () {
                    .send(bodies.formBody)
                    .end(done);
         });
-
-        it('should parse multipart/form-data into a stream', function (done) {
-            request(server.requestListener())
-                    .post('/file')
-                    .set('content-type', 'multipart/form-data')
-                    .attach('avatar', require('path').join(__dirname, '../za.js'))
-                    .expect('za.js')
-                    .end(done);
-        });
     });
 });
