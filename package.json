@@ -4,7 +4,7 @@
   "keywords": [
     "za"
   ],
-  "version": "0.0.19",
+  "version": "0.0.20",
   "main": "za.js",
   "homepage": "http://github.com/lighterio/za",
   "repository": "http://github.com/lighterio/za.git",
@@ -44,6 +44,6 @@
     "qs": "0.6.6",
     "supertest": "0.13.0",
     "zeriousify": "0.1.7",
-    "exam": "0.0.5"
+    "exam": "0.0.6"
   }
 }
