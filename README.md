@@ -200,7 +200,7 @@ Za includes its own multipart parser. When a multipart request is received, its
 handler is called before the multipart parser begins. The handler can listen
 for request events as file parsing proceeds.
 
-### request.on('za:file', fn)
+### request.on("za:file", fn)
 
 When the multipart parser finds a file, the request emits a `"za:file"` event
 and passes the file field. A listener can set a `stream` object on the file
@@ -209,18 +209,18 @@ will close the stream.
 
 ```javascript
 server.post('/upload', function (request, response) {
-  request.on('za:file', function () {
+  request.on('za:file', function (field) {
     var path = '/tmp/upload';
     var encoding = (/text/.test(field.type) ? 'utf8' : 'binary');
     field.stream = fs.createWriteStream(, encoding);
     field.stream.on('close', function () {
       response.send('File "' + field.filename + '" saved to "' + path + '".');
     });
-  })
+  });
 });
 ```
 
-### request.on('za:finished', fn)
+### request.on("za:finished", fn)
 
 When the multipart parser is finished, the request emits a `"za:finished"`
 event. At that time, `request.multipart` (as well as `request.body`) contain
