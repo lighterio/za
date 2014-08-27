@@ -4,11 +4,14 @@ require('./lib/http');
 // Allow us to instantiate HTTP and HTTPS servers.
 var Server = require('./lib/Server');
 
-var api = module.exports = function () {
+// The API is a function which returns a server.
+var za = module.exports = function () {
     return new Server();
 };
 
-/**
- * Expose the version to module users.
- */
-api.version = require('./package.json').version;
+// Expose the version number, but only load package JSON if a get is performed.
+Object.defineProperty(za, 'version', {
+  get: function () {
+    return require('./package.json').version;
+  }
+});
