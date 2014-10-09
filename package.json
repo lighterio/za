@@ -1,49 +1,35 @@
 {
   "name": "za",
-  "description": "A fast Node.js web server",
-  "keywords": [
-    "za"
-  ],
   "version": "0.0.21",
-  "main": "za.js",
-  "homepage": "http://github.com/lighterio/za",
-  "repository": "http://github.com/lighterio/za.git",
-  "bugs": {
-    "url": "http://github.com/lighterio/za/issues"
-  },
-  "author": {
-    "name": "Sam Eubank",
-    "email": "sameubank@gmail.com"
-  },
-  "contributors": [
-    {
-      "name": "Sam Eubank",
-      "email": "sameubank@gmail.com"
-    }
-  ],
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://github.com/lighterio/za/blob/master/MIT-LICENSE.md"
-    }
-  ],
-  "engines": [
-    "node >= 0.2.6"
-  ],
-  "scripts": {
-    "test": "./node_modules/exam/exam.js",
-    "retest": "./node_modules/exam/exam.js --watch",
-    "cover": "istanbul cover ./node_modules/exam/exam.js",
-    "report": "open coverage/lcov-report/index.html",
-    "coveralls": "istanbul cover ./node_modules/exam/exam.js --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
-  },
+  "description": "A fast Node.js web server",
   "dependencies": {},
   "devDependencies": {
     "coveralls": "2.10.0",
     "istanbul": "0.2.11",
     "qs": "0.6.6",
     "supertest": "0.13.0",
-    "zeriousify": "0.1.7",
-    "exam": "0.0.7"
-  }
+    "zeriousify": "^0.1.10",
+    "exam": "^0.0.8"
+  },
+  "keywords": [
+    "za"
+  ],
+  "main": "za.js",
+  "engines": {
+    "node": ">=0.2.6"
+  },
+  "scripts": {
+    "test": "./node_modules/exam/exam.js",
+    "cover": "istanbul cover ./node_modules/exam/exam.js",
+    "report": "open coverage/lcov-report/index.html",
+    "coveralls": "istanbul cover ./node_modules/exam/exam.js --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+  },
+  "repository": "https://github.com/lighterio/za.git",
+  "bugs": "https://github.com/lighterio/za/issues",
+  "homepage": "http://github.com/lighterio/za",
+  "author": "Sam Eubank <sameubank@gmail.com>",
+  "contributors": [
+    "Sam Eubank <sameubank@gmail.com>"
+  ],
+  "license": "MIT"
 }
