@@ -4,11 +4,41 @@ var server          = require('./fixtures/router-test-server');
 var bodies          = require('./fixtures/body-fixtures');
 var responses       = require('./fixtures/response-fixtures');
 
-describe('Server', function () {
-  it('should execute middleware', function (done) {
-    request(server.requestListener()).get('/middleware')
-      .expect(200)
-      .expect(JSON.stringify([1,2]), done);
+describe('Router', function () {
+
+  describe('middlewares', function () {
+    it('execute in order', function (done) {
+      request(server.requestListener())
+        .get('/middleware')
+        .send()
+        .expect(200)
+        .expect(JSON.stringify([1,2]))
+        .end(done);
+    });
+    it('support async mode', function (done) {
+      request(server.requestListener())
+        .get('/async')
+        .send()
+        .expect(200)
+        .expect(JSON.stringify([1,2]))
+        .end(done);
+    });
+    it('support sync mode', function (done) {
+      request(server.requestListener())
+        .get('/sync')
+        .send()
+        .expect(200)
+        .expect(JSON.stringify([1,3]))
+        .end(done);
+    });
+    it('support wildcards', function (done) {
+      request(server.requestListener())
+        .get('/sync/me/ok')
+        .send()
+        .expect(200)
+        .expect(JSON.stringify([1,3,4]))
+        .end(done);
+    });
   });
 
   describe('@requestListener', function () {
@@ -19,13 +49,15 @@ describe('Server', function () {
     });
   });
 
-  describe('router', function () {
-    it('should return 404 response', function (done) {
+  describe('.serve', function () {
+
+    it('should return a 404 if the route is not found', function (done) {
       request(server.requestListener()).get('/notfound')
         .expect(404)
         .end(done);
     });
-    it('should parse query param', function (done) {
+
+    it('should parse query params', function (done) {
       var queryObj = {
         hello: '12',
         world: 'too',
@@ -36,6 +68,7 @@ describe('Server', function () {
         .expect(JSON.stringify(queryObj))
         .end(done);
     });
+
   });
 
   describe('body parser', function () {
@@ -53,4 +86,22 @@ describe('Server', function () {
        .end(done);
     });
   });
+
+  describe('wildcards', function () {
+    it('match anything', function (done) {
+      request(server.requestListener())
+       .get('/wild/hello')
+       .send()
+       .expect('{"wild":"hello"}')
+       .end(done);
+    });
+    it('can appear in the middle', function (done) {
+      request(server.requestListener())
+       .get('/something/profile')
+       .send()
+       .expect('{"profile":"something"}')
+       .end(done);
+    });
+  });
+
 });
