@@ -1,6 +1,6 @@
 {
   "name": "za",
-  "version": "0.0.21",
+  "version": "0.1.0",
   "description": "A fast Node.js web server",
   "dependencies": {},
   "devDependencies": {
@@ -9,7 +9,7 @@
     "qs": "0.6.6",
     "supertest": "0.13.0",
     "zeriousify": "^0.1.10",
-    "exam": "^0.0.8"
+    "exam": "^0.1.2"
   },
   "keywords": [
     "za"
@@ -22,7 +22,7 @@
     "test": "./node_modules/exam/exam.js",
     "cover": "istanbul cover ./node_modules/exam/exam.js",
     "report": "open coverage/lcov-report/index.html",
-    "coveralls": "istanbul cover ./node_modules/exam/exam.js --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+    "coveralls": "istanbul cover ./node_modules/exam/exam.js && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "repository": "https://github.com/lighterio/za.git",
   "bugs": "https://github.com/lighterio/za/issues",

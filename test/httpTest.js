@@ -7,6 +7,13 @@ var codes = server.codes;
 
 describe('http', function () {
 
+  it('supports HEAD', function (done) {
+    request(server.requestListener()).head('/send/json')
+      .expect(200)
+      .expect('')
+      .end(done);
+  });
+
   describe('zip', function () {
     it('returns zipped content', function (done) {
       request(server.requestListener()).get('/zip')

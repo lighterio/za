@@ -8,6 +8,15 @@ server.get('/', function (req, res) {
   res.json(responses.shortJson);
 });
 
+server.get('/wild/*', function (req, res) {
+  var wild = req.url.replace(/^\/wild\//, '');
+  res.json({wild: wild});
+});
+
+server.get('/*/profile', function (req, res) {
+  res.json({profile: req.url.split('/')[1]});
+});
+
 server.post('/json', function (req, res) {
   res.json(req.body);
 });
@@ -29,6 +38,30 @@ server.use('/middleware', function (req, res, next) {
   req.middle.push(2);
   next();
 });
+
+
+server.use(/sync/, function (req, res) {
+  req.middle = [1];
+  return true;
+});
+
+server.use(/async/, function (req, res, next) {
+  req.middle.push(2);
+  next();
+});
+
+server.use('/sync', function (req, res) {
+  return req.middle.push(3);
+});
+
+server.use('/sync/*/ok', function (req, res) {
+  return req.middle.push(4);
+});
+
+server.get(/sync/, function (req, res) {
+  res.json(req.middle);
+});
+
 
 server.get('/query', function (req, res) {
   var q = req.query;
