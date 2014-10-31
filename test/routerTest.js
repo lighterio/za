@@ -72,6 +72,7 @@ describe('Router', function () {
   });
 
   describe('body parser', function () {
+
     it('should parse passed json body', function (done) {
       request(server.requestListener())
        .post('/json')
@@ -79,12 +80,29 @@ describe('Router', function () {
        .send(JSON.stringify(bodies.jsonBody))
        .end(done);
     });
+
     it('should parse urlencoded post body', function (done) {
       request(server.requestListener())
        .post('/urlencoded')
        .send(bodies.formBody)
        .end(done);
     });
+
+    it('should log a warning when invalid JSON is passed', function (done) {
+      var parse = require('../lib/parse');
+      var logger = parse.logger;
+      is(logger, console);
+      parse.logger = {warn: mock.concat()};
+      request(server.requestListener())
+       .post('/json')
+       .set('Content-Type', 'application/json')
+       .send('{"key":"value"} Whoops!')
+       .end(function () {
+         parse.logger = logger;
+         done();
+       });
+    });
+
   });
 
   describe('wildcards', function () {
