@@ -6,8 +6,8 @@ require('./lib/Response');
 var Server = require('./lib/Server');
 
 // The API is a function which returns a server.
-var za = module.exports = function () {
-  return new Server();
+var za = module.exports = function (config) {
+  return new Server(config);
 };
 
 // Expose the version number, but only load package JSON if a get is performed.
